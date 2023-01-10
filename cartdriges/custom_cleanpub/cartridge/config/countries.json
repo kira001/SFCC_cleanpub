@@ -1,0 +1,17 @@
+[
+    {
+        "id": "en_US",
+        "currencyCode": "USD",
+        "weight": "lb."
+    },
+    {
+        "id": "en_GB",
+        "currencyCode": "GBP",
+        "weight": "lb."
+    },
+    {
+        "id": "it_IT",
+        "currencyCode": "EUR",
+        "weight": "kg."
+    }
+]
