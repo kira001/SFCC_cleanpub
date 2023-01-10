@@ -15,18 +15,8 @@
                 <div class="card">
                     <div class="card-body">
                         <form action="${pdict.actionUrl}" class="contact-us" method="POST" name="contact-us">
-                            <!--- contact us first name, last name --->
-                            <div class="row contact-us-name">
-                                <div class="col-sm-6">
-                                    <div class="form-group required">
-                                        <label class="form-control-label" for="contact-first-name">
-                                            ${Resource.msg('label.input.contact-us-first-name', 'contactUs', null)}
-                                        </label>
-                                        <input type="text" required class="form-control required" aria-describedby="form-contact-first-name-error" id="contact-first-name" name="contactFirstName">
-                                        <div class="invalid-feedback" id="form-contact-first-name-error"></div>
-                                    </div>
-                                </div>
-                                </div>
+          
+          <input type="hidden" name="authorId" value="${pdict.authorId}"/>                              
 
                             <!--- contact us email --->
                             <div class="row contact-us-email">

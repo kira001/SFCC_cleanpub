@@ -20,10 +20,9 @@ server.extend(module.superModule);
  */
 server.get('ShowForm', server.middleware.https, function (req, res, next) {
     var URLUtils = require('dw/web/URLUtils');
-
-    res.render('contactUs/contactUs.isml', {
+    res.render('../template/default/emailFormAuthor.isml', {
         actionUrl: URLUtils.url('emailAuthor-SendEmail').toString(),
-        authorId: authorId
+        authorId: req.querystring.authorId
     });
     next();
 });
@@ -45,15 +44,13 @@ server.get('ShowForm', server.middleware.https, function (req, res, next) {
  */
 server.post('SendEmail', server.middleware.https, function (req, res, next) {
     var Resource = require('dw/web/Resource');
-    var hooksHelper = require('*/cartridge/scripts/helpers/hooks');
+    var HookManager = require('dw/system/HookMgr');
     var emailHelper = require('*/cartridge/scripts/helpers/emailHelpers');
     var myForm = req.form;
-
-    var author = req.product.custom.authormail
     var isValidEmailid = emailHelper.validateEmail(myForm.contactEmail);
     if (isValidEmailid) {
-        var contactDetails = [myForm.contactFirstName, myForm.contactEmail, myForm.contactComment, myForm.authorId];
-        hooksHelper('app.contactUs.subscribe', 'subscribe', contactDetails, function () { });
+        var contactDetails = [myForm.authorId, myForm.contactEmail, myForm.contactComment];
+        HookManager.callHook('app.sendEmailToAuthor', 'sendEmailToAuthor', contactDetails);
         res.json({
             success: true,
             msg: Resource.msg('subscribe.to.contact.us.success', 'contactUs', null)

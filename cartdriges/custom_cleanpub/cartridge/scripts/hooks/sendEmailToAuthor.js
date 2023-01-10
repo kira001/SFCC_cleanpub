@@ -10,8 +10,10 @@ var Mail = require('dw/net/Mail');
  */
 function sendEmailToAuthor(contactAuthor) {
 
+    var authorHelper = require("~/scripts/helpers/authorHelpers.js")
+    var authorEmail = authorHelper.getAuthorEmail(contactAuthor.authorId);
     var mail = new Mail();
-    mail.addTo(contactAuthor.authorId);
+    mail.addTo(authorEmail);
     mail.setFrom(contactAuthor.contactEmail);
     mail.setSubject("INFORMATION");
     mail.setContent(contactAuthor.contactComment);

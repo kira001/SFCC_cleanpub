@@ -346,12 +346,11 @@ function showProductPage(querystring, reqPageMetaData) {
     var URLUtils = require('dw/web/URLUtils');
     var ProductFactory = require('*/cartridge/scripts/factories/product');
     var pageMetaHelper = require('*/cartridge/scripts/helpers/pageMetaHelper');
-
     var params = querystring;
     var product = ProductFactory.get(params);
     var addToCartUrl = URLUtils.url('Cart-AddProduct');
     var canonicalUrl = URLUtils.url('Product-Show', 'pid', product.id);
-    //var authorId = URLUtils.url('-Show', 'pid', authorId);
+    var contactAuthorURL = URLUtils.url('emailAuthor-ShowForm', 'pid', product.custom.authorId);
     var breadcrumbs = getAllBreadcrumbs(null, product.id, []).reverse();
 
     var template = 'product/productDetails';
@@ -375,7 +374,8 @@ function showProductPage(querystring, reqPageMetaData) {
         resources: getResources(),
         breadcrumbs: breadcrumbs,
         canonicalUrl: canonicalUrl,
-        schemaData: schemaData
+        schemaData: schemaData,
+        contactAuthorURL: contactAuthorURL
     };
 }
 

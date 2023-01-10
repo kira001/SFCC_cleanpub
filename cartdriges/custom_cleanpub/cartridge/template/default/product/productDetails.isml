@@ -132,7 +132,7 @@
 
                     <!-- buttonContactAuthor -->
                     <div class="row">
-                       <a href="${pdict.authorId}">  ${Resource.msg('label.linkToForm', 'formAuthor', null)} </a>
+                       <a href="${pdict.contactAuthorURL}">  ${Resource.msg('label.linkToForm', 'formAuthor', null)} </a>
                     </div>
 
                 </div>
