@@ -9,7 +9,7 @@
     <isset name="product" value="${pdict.product}" scope="page" />
     <isset name="isQuickView" value="${false}" scope="page" />
     <isset name="isProductSet" value="${pdict.product.productType === 'set'}" scope="page" />
-    <isobject object="${product.raw}" view="detail" />
+    <isobject object="${product.raw}" view="detail" >
     <div class="container product-detail product-wrapper" data-pid="${product.id}">
         <div class="row">
             <div class="col-12">
@@ -130,10 +130,11 @@
                         <isinclude template="product/components/socialIcons" />
                     </div>
 
-                    <!-- Sustainability -->
+                    <!-- buttonContactAuthor -->
                     <div class="row">
-                        <isinclude template="product/components/sustainability" />
+                       <a href="${pdict.authorId}">  ${Resource.msg('label.linkToForm', 'formAuthor', null)} </a>
                     </div>
+
                 </div>
             </div>
         </div>

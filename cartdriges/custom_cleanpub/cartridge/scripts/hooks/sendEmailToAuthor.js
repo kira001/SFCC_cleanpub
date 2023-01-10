@@ -2,6 +2,7 @@
 
 var Mail = require('dw/net/Mail');
 
+
 /**
  * Send contact form data to client
  * @param {Array} sendEmailToAuthor  - The contact Author form data
@@ -9,19 +10,29 @@ var Mail = require('dw/net/Mail');
  */
 function sendEmailToAuthor(contactAuthor) {
 
-    var content = contactDetails[contactFirstName] + " " + contactDetails[contactLastName] + " " + contactDetails[contactEmail] + "\n" + contactDetails[contactTopic] + " " + contactDetails[contactComment];
-
     var mail = new Mail();
-    mail.addTo("ecommerce@pippo.online");
-    mail.setFrom("noreply@pippo.online");
-    mail.setSubject("PIPPO SITE CONTACT FORM");
-
-    mail.setContent(content);
+    mail.addTo(contactAuthor.authorId);
+    mail.setFrom(contactAuthor.contactEmail);
+    mail.setSubject("INFORMATION");
+    mail.setContent(contactAuthor.contactComment);
     mail.send();
 
     return;
 }
 
-module.exports = {
-    sendEmailAuthor
+/**
+ * Checks if the email value entered is correct format
+ * @param {string} email - email string to check if valid
+ * @returns {boolean} Whether email is valid
+ */
+function validateEmail(email) {
+    var regex = /^[\w.%+-]+@[\w.-]+\.[\w]{2,6}$/;
+    return regex.test(email);
 }
+
+module.exports = {
+    sendEmailToAuthor,
+    validateEmail: validateEmail
+}
+
+

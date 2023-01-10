@@ -1,0 +1,16 @@
+<div class="row cart-and-ipay">
+    <div class="col-sm-12">
+        <input type="hidden" class="add-to-cart-url" value="${pdict.addToCartUrl}">
+        <button class="btn btn-primary"
+                data-toggle="modal" data-target="#chooseBonusProductModal"
+                data-pid="${product.custom.authorId}">
+
+        <a href="${URLUtils.url('pdict.emailAuthorForm')}">${Resource.msg('label.contactAuthor', 'common', null)}</a>
+
+        </button>
+
+        <iscomment> <a href="${URLUtils.url('Order-History')}" role="menuitem" tabindex="0">${Resource.msg('label.myorders', 'account', null)}</a> </iscomment>
+
+      <!--  <isinclude template="product/components/addToCartButtonExtension"/> -->
+    </div>
+</div>
