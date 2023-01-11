@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
-    <custom-type type-id="emailAddress">
+    <custom-type type-id="Author">
         <display-name xml:lang="x-default">author</display-name>
         <description xml:lang="x-default">Object for Author</description>
         <staging-mode>no-staging</staging-mode>

@@ -1,78 +1,98 @@
-'use strict';
+"use strict";
 
+var server = require("server");
 
+var cache = require("*/cartridge/scripts/middleware/cache");
 
-var server = require('server');
+var consentTracking = require("*/cartridge/scripts/middleware/consentTracking");
 
-
-
-var cache = require('*/cartridge/scripts/middleware/cache');
-
-var consentTracking = require('*/cartridge/scripts/middleware/consentTracking');
-
-var pageMetaData = require('*/cartridge/scripts/middleware/pageMetaData');
-
-
+var pageMetaData = require("*/cartridge/scripts/middleware/pageMetaData");
 
 server.extend(module.superModule);
 
+server.replace(
+  "Show",
+  cache.applyPromotionSensitiveCache,
+  consentTracking.consent,
+  function (req, res, next) {
+    var productHelper = require("*/cartridge/scripts/helpers/productHelpers");
 
-server.replace('Show', cache.applyPromotionSensitiveCache, consentTracking.consent, function (req, res, next) {
+    var minimumPrice = productHelper.minimumPrice(
+      showProductPageHelperResult.product
+    );
+    var authorId = productHelper.authorId(showProductPageHelperResult.product);
 
-    var productHelper = require('*/cartridge/scripts/helpers/productHelpers');
+    var productReadiness = productHelper.productReadiness(
+      showProductPageHelperResult.product
+    );
 
-    var showProductPageHelperResult = productHelper.showProductPage(req.querystring, req.pageMetaData);
+    var suggestedPrice = productHelper.suggestedPrice(
+      showProductPageHelperResult.product
+    );
+
+    var showProductPageHelperResult = productHelper.showProductPage(
+      req.querystring,
+      req.pageMetaData
+    );
 
     var productType = showProductPageHelperResult.product.productType;
 
-    if (!showProductPageHelperResult.product.online && productType !== 'set' && productType !== 'bundle') {
+    if (
+      !showProductPageHelperResult.product.online &&
+      productType !== "set" &&
+      productType !== "bundle"
+    ) {
+      res.setStatusCode(404);
 
-        res.setStatusCode(404);
-
-        res.render('error/notFound');
-
+      res.render("error/notFound");
     } else {
+      var pageLookupResult = productHelper.getPageDesignerProductPage(
+        showProductPageHelperResult.product
+      );
 
-        var pageLookupResult = productHelper.getPageDesignerProductPage(showProductPageHelperResult.product);
+      if (
+        (pageLookupResult.page && pageLookupResult.page.hasVisibilityRules()) ||
+        pageLookupResult.invisiblePage
+      ) {
+        res.cachePeriod = 0; // eslint-disable-line no-param-reassign
+      }
 
+      if (pageLookupResult.page) {
+        res.page(
+          pageLookupResult.page.ID,
+          {},
+          pageLookupResult.aspectAttributes
+        );
+      } else {
+        res.render(showProductPageHelperResult.template, {
+          product: showProductPageHelperResult.product,
 
-        if ((pageLookupResult.page && pageLookupResult.page.hasVisibilityRules()) || pageLookupResult.invisiblePage) {
+          addToCartUrl: showProductPageHelperResult.addToCartUrl,
 
-            res.cachePeriod = 0; // eslint-disable-line no-param-reassign
+          resources: showProductPageHelperResult.resources,
 
-        }
+          breadcrumbs: showProductPageHelperResult.breadcrumbs,
 
-        if (pageLookupResult.page) {
+          canonicalUrl: showProductPageHelperResult.canonicalUrl,
 
-            res.page(pageLookupResult.page.ID, {}, pageLookupResult.aspectAttributes);
+          schemaData: showProductPageHelperResult.schemaData,
 
-        } else {
+          productReadiness: showProductPageHelperResult.productReadiness,
 
-            res.render(showProductPageHelperResult.template, {
+          suggestedPrice: showProductPageHelperResult.suggestedPrice,
 
-                product: showProductPageHelperResult.product,
+          authorId: showProductPageHelperResult.authorId,
 
-                addToCartUrl: showProductPageHelperResult.addToCartUrl,
+          minimumPricev: showProductPageHelperResult.minimumPrice,
 
-                resources: showProductPageHelperResult.resources,
-
-                breadcrumbs: showProductPageHelperResult.breadcrumbs,
-
-                canonicalUrl: showProductPageHelperResult.canonicalUrl,
-
-                schemaData: showProductPageHelperResult.schemaData,
-
-                contactAuthorURL: showProductPageHelperResult.contactAuthorURL,
-            });
-
-        }
-
+          contactAuthorURL: showProductPageHelperResult.contactAuthorURL,
+        });
+      }
     }
 
     next();
-
-}, pageMetaData.computedPageMetaData);
-
-
+  },
+  pageMetaData.computedPageMetaData
+);
 
 module.exports = server.exports();

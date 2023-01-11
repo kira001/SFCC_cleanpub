@@ -4,5 +4,5 @@ var sfraProduct = require("base/models/product/decorators/index");
 
 module.exports = {
     sfraProduct,
-    customPrice: require('*/cartridge/models/product/decorators/customPrice')
+    custom: require('*/cartridge/models/product/decorators/custom')
 }

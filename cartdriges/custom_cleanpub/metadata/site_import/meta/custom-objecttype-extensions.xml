@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xmlns="http://www.demandware.com/xml/impex/metadata/2006-10-31">
+    <type-extension type-id="Product">
+        <custom-attribute-definitions>
+            <attribute-definition attribute-id="minimumPrice">
+                <display-name xml:lang="x-default">Minimum Price</display-name>
+                <description xml:lang="x-default">attribute minimumPrice</description>
+                <type>number</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="authorId">
+                <display-name xml:lang="x-default">author Id</display-name>
+                <description xml:lang="x-default">authorId used by shopper</description>
+                <type>number</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-length>0</field-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="productReadiness">
+                <display-name xml:lang="x-default">productReadiness</display-name>
+                <description xml:lang="x-default">productReadiness</description>
+                <type>number</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+                <field-length>0</field-length>
+            </attribute-definition>
+            <attribute-definition attribute-id="suggestedPrice">
+                <display-name xml:lang="x-default">suggestedPrice</display-name>
+                <description xml:lang="x-default">suggestedPrice</description>
+                <type>number</type>
+                <mandatory-flag>false</mandatory-flag>
+                <externally-managed-flag>false</externally-managed-flag>
+                <min-length>0</min-length>
+            </attribute-definition>
+        </custom-attribute-definitions>
+        <group-definitions>
+            <attribute-group group-id="Author Custom">
+                <display-name xml:lang="x-default">Custom for cleanpub</display-name>
+                <attribute attribute-id="suggestedPrice"/>
+                <attribute attribute-id="productReadiness"/>
+                <attribute attribute-id="authorId"/>
+                <attribute attribute-id="minimumPrice"/>
+            </attribute-group>
+        </group-definitions>
+    </type-extension>
+</metadata>
