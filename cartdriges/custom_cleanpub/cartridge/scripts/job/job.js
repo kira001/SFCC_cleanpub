@@ -4,9 +4,11 @@ var ProductMgr = require("dw/catalog/ProductMgr");
 function execute() {
   var file = new File("/IMPEX(/authorId/products.csv)");
   var reader = new CSVStreamReader(file, ",");
-  var line = reader.readNextLine();
+  var line = reader.readNext();
 
-  while (line != null) {
+  //lista --> reader.readAll()
+
+  while (line.asNext()) {
     var id = line[0];
     var name = line[1];
     var description = line[2];
@@ -27,6 +29,6 @@ function execute() {
     //Product published or saved
     ProductMgr.saveProduct(product);
     // goes to next line
-    line = reader.readNextLine();
+    line = reader.readNext();
   }
 }
