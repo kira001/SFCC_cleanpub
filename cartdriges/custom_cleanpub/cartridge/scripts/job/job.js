@@ -17,17 +17,12 @@ function execute() {
     var suggestedPrice = line[5];
     var percCompleted = line[6];
     // create product
-    var product = ProductMgr.createProduct(id, name, null);
-    // set product properties
-    product.setDescription(description);
-    product.setPrice(parseFloat(price));
-    var priceModel = product.getPriceModel();
-    priceModel.price = parseFloat(price);
-    priceModel.minimumPrice = parseFloat(minimumPrice);
-    priceModel.suggestedPrice = parseFloat(suggestedPrice);
-    productModel.percCompleted = parseFloat(percCompleted);
-    //Product published or saved
-    ProductMgr.saveProduct(product);
+
+    
+   
+
+    // PUT https://hostname:port/dw/data/v23_1/products/{id}
+
     // goes to next line
     line = reader.readNext();
   }
