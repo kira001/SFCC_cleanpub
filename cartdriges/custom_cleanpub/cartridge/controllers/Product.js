@@ -15,7 +15,7 @@ server.replace(
   cache.applyPromotionSensitiveCache,
   consentTracking.consent,
   function (req, res, next) {
-    var productHelper = require("*/cartridge/scripts/helpers/productHelpers");
+    var productHelper = require("~/cartridge/scripts/helpers/productHelpers");
 
     var minimumPrice = productHelper.minimumPrice(
       showProductPageHelperResult.product

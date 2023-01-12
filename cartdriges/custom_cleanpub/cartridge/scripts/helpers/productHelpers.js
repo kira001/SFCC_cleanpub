@@ -6,7 +6,7 @@ var Locale = require("dw/util/Locale");
 var countries = require("*/cartridge/config/countries");
 
 function minimumPrice(product) {
-  var currentLocale = Locale.getLocale(req.locale.id).toString();
+  // var currentLocale = Locale.getLocale(req.locale.id).toString();
   return product.minimumPrice;
 }
 
@@ -22,9 +22,14 @@ function productReadiness(product) {
   return product.productReadiness;
 }
 
+function URLdownload(product) {
+  return product.URLdownload;
+}
+
 base.minimumPrice = minimumPrice;
 base.authorId = authorId;
 base.productReadiness = productReadiness;
+base.URLdownload = URLdownload;
 base.suggestedPrice = suggestedPrice;
 
 module.exports = base;

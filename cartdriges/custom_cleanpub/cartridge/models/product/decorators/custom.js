@@ -26,5 +26,10 @@ module.exports = function (object, product) {
     enumerable: true,
     value: product.custom.productReadiness,
   });
+
+  Object.defineProperty(object, "URLdownload", {
+    enumerable: true,
+    value: product.custom.URLdownload,
+  });
   
 };

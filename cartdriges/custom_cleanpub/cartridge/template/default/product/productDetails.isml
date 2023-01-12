@@ -103,6 +103,9 @@
                     <!-- Product Availability -->
                     <isinclude template="product/components/productAvailability" />
 
+                    <!-- Product Completation -->
+                    <isinclude template="product/components/completation" />
+
                     <!-- Applicable Promotions -->
                     <div class="row">
                         <div class="col-12 promotions">
