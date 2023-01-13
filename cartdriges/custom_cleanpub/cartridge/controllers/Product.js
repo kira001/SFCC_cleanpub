@@ -17,19 +17,15 @@ server.replace(
   function (req, res, next) {
     var productHelper = require("~/cartridge/scripts/helpers/productHelpers");
 
-    var minimumPrice = productHelper.minimumPrice(
-      showProductPageHelperResult.product
-    );
-    var authorId = productHelper.authorId(showProductPageHelperResult.product);
+    var minimumPrice = productHelper.minimumPrice(productHelper.product);
+    var authorId = productHelper.authorId(productHelper.product);
 
     var productReadiness = productHelper.productReadiness(
-      showProductPageHelperResult.product
+      productHelper.product
     );
 
-    var suggestedPrice = productHelper.suggestedPrice(
-      showProductPageHelperResult.product
-    );
-
+    var suggestedPrice = productHelper.suggestedPrice(productHelper.product);
+    
     var showProductPageHelperResult = productHelper.showProductPage(
       req.querystring,
       req.pageMetaData
@@ -83,7 +79,7 @@ server.replace(
 
           authorId: showProductPageHelperResult.authorId,
 
-          minimumPricev: showProductPageHelperResult.minimumPrice,
+          minimumPrice: showProductPageHelperResult.minimumPrice,
 
           contactAuthorURL: showProductPageHelperResult.contactAuthorURL,
         });
