@@ -1,0 +1,65 @@
+<isdecorate template="common/layout/page">
+    <isscript>
+        var assets = require('*/cartridge/scripts/assets.js');
+        assets.addJs('/js/contactUs.js');
+        assets.addCss('/css/contactUs.css');
+    </isscript>
+
+    <div class="hero slant-down contact-us-banner">
+        <h1 class="page-title">${Resource.msg('title.contact.us.page', 'contactUs', null)}</h1>
+    </div>
+
+    <div class="container contact-us-landing-page">
+        <div class="row justify-content-center">
+            <div class="col-sm-8 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="${pdict.actionUrl}" class="contact-us" method="POST" name="contact-us">
+          
+          <input type="hidden" name="authorId" value="${pdict.authorId}"/>                              
+
+                            <!--- contact us email --->
+                            <div class="row contact-us-email">
+                                <div class="col">
+                                    <div class="form-group required">
+                                        <label class="form-control-label" for="contact-email">
+                                            ${Resource.msg('label.input.contact-us-email', 'contactUs', null)}
+                                        </label>
+                                        <input type="email" required class="form-control required" aria-describedby="form-contact-email-error" id="contact-email" name="contactEmail">
+                                        <div class="invalid-feedback" id="form-contact-email-error"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                   
+                            <!--- contact us comment --->
+                            <div class="row contact-us-comment">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="contact-comment">
+                                            ${Resource.msg('label.input.contact-us-comment', 'contactUs', null)}
+                                        </label>
+                                        <textarea class="form-control" id="contact-comment" name="contactComment" rows="4" maxlength="250"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--- contact us submit --->
+                            <div class="row contact-us-submnit">
+                                <div class="col-sm-6">
+                                </div>
+                                <div class="col">
+                                    <div class="form-group">
+                                        <button class="btn btn-block btn-primary subscribe-contact-us" type="submit" name="submit" value="submit">
+                                            ${Resource.msg('label.input.contact-us-submit', 'contactUs', null)}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</isdecorate>

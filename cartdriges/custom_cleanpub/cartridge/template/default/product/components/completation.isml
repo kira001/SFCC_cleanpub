@@ -1,0 +1,5 @@
+<!-- Product Completation -->
+<p> </p>
+<input type="range" name="completation" value="">
+
+<p>${`this book is ${pdict.productReadiness} complete`}</p>

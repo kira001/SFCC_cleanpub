@@ -1,0 +1,8 @@
+{
+    "hooks": [
+        {
+            "name": "app.sendEmailToAuthor",
+            "script": "./cartridge/scripts/hooks/sendEmailToAuthor.js"
+        }
+    ]
+}
